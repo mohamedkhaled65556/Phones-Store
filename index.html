@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Products Admin</title>
+
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+    />
+
+    <!-- Animate CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <section class="admin-section">
+      <!-- =========================
+         Title
+    ========================== -->
+
+      <div class="product-title">Your Products</div>
+
+      <!-- =========================
+         Add Product Modal
+    ========================== -->
+
+      <div class="modalBody" id="newPhoneModal">
+        <div class="modal-content-box animate__animated animate__fadeInUp">
+          <h1>Add New Phone</h1>
+
+          <input
+            id="phoneNameInput"
+            class="form-control"
+            type="text"
+            placeholder="Enter Phone Name"
+          />
+
+          <input
+            id="phonePriceInput"
+            class="form-control"
+            type="number"
+            min="0"
+            placeholder="Enter Phone Price"
+          />
+
+          <input
+            id="phoneQtyInput"
+            class="form-control"
+            type="number"
+            min="0"
+            placeholder="Enter Phone Qty"
+          />
+
+          <input
+            id="phoneImageInput"
+            class="form-control"
+            type="url"
+            placeholder="Enter Image URL"
+          />
+
+          <div class="modal-buttons">
+            <button id="saveAdd" class="btn save-btn" onclick="addNewPhone()">
+              <i class="fa-solid fa-floppy-disk"></i>
+
+              Save Phone
+            </button>
+
+            <button id="closeAdd" class="btn close-btn" onclick="closeModal()">
+              <i class="fa-solid fa-xmark"></i>
+
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================
+         Edit Product Modal
+    ========================== -->
+
+      <div class="modalBody" id="editPhoneModal">
+        <div class="modal-content-box animate__animated animate__fadeInUp">
+          <h1>Edit Phone</h1>
+
+          <input
+            id="phoneNameInputE"
+            class="form-control"
+            type="text"
+            placeholder="Enter Phone Name"
+          />
+
+          <input
+            id="phonePriceInputE"
+            class="form-control"
+            type="number"
+            min="0"
+            placeholder="Enter Phone Price"
+          />
+
+          <input
+            id="phoneQtyInputE"
+            class="form-control"
+            type="number"
+            min="0"
+            placeholder="Enter Phone Qty"
+          />
+
+          <input
+            id="phoneImageInputE"
+            class="form-control"
+            type="url"
+            placeholder="Enter Image URL"
+          />
+
+          <div class="modal-buttons">
+            <button id="saveEdit" class="btn save-btn" onclick="editPhone()">
+              <i class="fa-solid fa-floppy-disk"></i>
+
+              Save Changes
+            </button>
+
+            <button id="closeEdit" class="btn close-btn" onclick="closeModal()">
+              <i class="fa-solid fa-xmark"></i>
+
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================
+         Actions
+    ========================== -->
+
+      <div class="actionsContainer">
+        <!-- Add -->
+        <button id="btn1" class="btn" onclick="openModal()">
+          <i class="fa-solid fa-plus"></i>
+
+          Add New Phone
+        </button>
+
+        <!-- Show All -->
+        <button id="btn5" class="btn" onclick="showProducts()">
+          <i class="fa-solid fa-list"></i>
+
+          Show All
+        </button>
+
+        <!-- Search -->
+        <div class="search">
+          <input
+            id="searchInput"
+            list="list"
+            type="text"
+            class="input"
+            placeholder="Enter Phone Name"
+            oninput="searchList()"
+          />
+
+          <datalist id="list"></datalist>
+
+          <button id="btn4" class="btn" onclick="searchByName()">
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            Search
+          </button>
+        </div>
+      </div>
+
+      <!-- =========================
+         Products Table
+    ========================== -->
+
+      <div class="table-container">
+        <table class="table table-borderless">
+          <thead>
+            <tr>
+              <th>#</th>
+
+              <th>Image</th>
+
+              <th>Phone Name</th>
+
+              <th>Phone Price</th>
+
+              <th>Phone Qty</th>
+
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody id="productsTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Admin JavaScript -->
+    <script src="./admin.js"></script>
+  </body>
+</html>
