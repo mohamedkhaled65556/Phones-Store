@@ -433,10 +433,31 @@ body {
   font-weight: 600;
   padding: 5px 10px;
 }
+
 .btn1:hover {
   background-color: #8e1300;
   color: white;
 }
+
+.admin-button {
+  text-decoration: none;
+  background-color: #a51700;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.admin-button:hover {
+  background-color: #8e1300;
+  color: white;
+}
+
 /* ==========================================
    CART
 ========================================== */
