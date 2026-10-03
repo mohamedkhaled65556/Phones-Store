@@ -30,31 +30,28 @@
     ========================== -->
 
       <div class="store-header">
-  <h1>Phone Store</h1>
+        <h1>Phone Store</h1>
 
-  <div class="cart-header">
+        <div class="cart-header">
+          <!-- Admin Button -->
+          <a href="./admin.html" class="admin-button">
+            <i class="fa-solid fa-user-shield"></i>
+            Admin
+          </a>
 
-    <!-- Admin Button -->
-    <a href="./admin.html" class="admin-button">
-      <i class="fa-solid fa-user-shield"></i>
-      Admin
-    </a>
+          <!-- Cart Button -->
+          <button
+            class="cart-button"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight"
+          >
+            <i class="fa-solid fa-cart-shopping"></i>
+          </button>
 
-    <!-- Cart Button -->
-    <button
-      class="cart-button"
-      type="button"
-      data-bs-toggle="offcanvas"
-      data-bs-target="#offcanvasRight"
-    >
-      <i class="fa-solid fa-cart-shopping"></i>
-    </button>
-
-    <span id="Length">0</span>
-
-  </div>
-</div>
-      
+          <span id="Length">0</span>
+        </div>
+      </div>
 
       <!-- =========================
          Cart Offcanvas
@@ -73,11 +70,10 @@
 
         <div class="offcanvas-body" id="cartContainer"></div>
 
-        <div class="alert alert-info m-0">
+        <div class="alert alert-danger m-0">
           <h4>
             Total:
-            <span id="TotalCost"> 0 </span>
-            USD
+            <span id="TotalCost"> 0</span>$
           </h4>
         </div>
       </div>
