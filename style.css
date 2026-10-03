@@ -24,6 +24,15 @@ body {
   font-weight: 600;
 }
 
+.products-link{
+  color: white;
+  text-decoration: none;
+}
+
+.products-link:hover{
+  color: #9a3b0b;
+}
+
 /* ==========================================
    PRODUCT TITLE
 ========================================== */
