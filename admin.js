@@ -2,195 +2,65 @@
 // PRODUCTS
 // ==========================================
 
-let products =
-    JSON.parse(
-        localStorage.getItem("products")
-    ) || [];
-
-// ==========================================
-// INITIAL PRODUCTS
-// ==========================================
-
-if (products.length === 0) {
-
-    products = [
-
-        {
-            id: crypto.randomUUID(),
-
-            name: "Samsung A13",
-
-            price: 300,
-
-            totalQty: 10,
-
-            imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSttTJWLajYboJMhLc8_eUMIJpy60Jt8UBsj7Fsb0O5eA&s=10"
-        },
-
-
-        {
-            id: crypto.randomUUID(),
-
-            name: "Iphone 18 Pro",
-
-            price: 1500,
-
-            totalQty: 8,
-
-            imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbg7MLyRF_220YF73NcUiFf6nGKU5S0ZXC0Iz-6Em7tQ&s"
-        },
-
-
-        {
-            id: crypto.randomUUID(),
-
-            name: "Iphone X",
-
-            price: 400,
-
-            totalQty: 6,
-
-            imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJjSJGlwJNJTrYwa8zzF87dIUzglwHZpsnGHp4DE6VFA&s=10"
-        },
-
-
-        {
-            id: crypto.randomUUID(),
-
-            name: "Oppo F9",
-
-            price: 200,
-
-            totalQty: 12,
-
-            imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaT3sqS93tEAx4DqHiAYOu2D8MGxe2YwFKsq2JbVxYpg&s=10"
-        }
-
-    ];
-
-
-    saveProducts();
-}
-
+products = JSON.parse(localStorage.getItem("products")) || [];
 
 // ==========================================
 // DOM ELEMENTS
 // ==========================================
 
-const tableBody =
-    document.querySelector(
-        "#productsTableBody"
-    );
+const tableBody = document.querySelector("#productsTableBody");
 
+const newPhoneModal = document.querySelector("#newPhoneModal");
 
-const newPhoneModal =
-    document.querySelector(
-        "#newPhoneModal"
-    );
-
-
-const editPhoneModal =
-    document.querySelector(
-        "#editPhoneModal"
-    );
-
+const editPhoneModal = document.querySelector("#editPhoneModal");
 
 // Add Inputs
 
-const phoneNameInput =
-    document.querySelector(
-        "#phoneNameInput"
-    );
+const phoneNameInput = document.querySelector("#phoneNameInput");
 
+const phonePriceInput = document.querySelector("#phonePriceInput");
 
-const phonePriceInput =
-    document.querySelector(
-        "#phonePriceInput"
-    );
+const phoneQtyInput = document.querySelector("#phoneQtyInput");
 
-
-const phoneQtyInput =
-    document.querySelector(
-        "#phoneQtyInput"
-    );
-
-
-const phoneImageInput =
-    document.querySelector(
-        "#phoneImageInput"
-    );
-
+const phoneImageInput = document.querySelector("#phoneImageInput");
 
 // Edit Inputs
 
-const phoneNameInputE =
-    document.querySelector(
-        "#phoneNameInputE"
-    );
+const phoneNameInputE = document.querySelector("#phoneNameInputE");
 
+const phonePriceInputE = document.querySelector("#phonePriceInputE");
 
-const phonePriceInputE =
-    document.querySelector(
-        "#phonePriceInputE"
-    );
+const phoneQtyInputE = document.querySelector("#phoneQtyInputE");
 
-
-const phoneQtyInputE =
-    document.querySelector(
-        "#phoneQtyInputE"
-    );
-
-
-const phoneImageInputE =
-    document.querySelector(
-        "#phoneImageInputE"
-    );
-
+const phoneImageInputE = document.querySelector("#phoneImageInputE");
 
 // Search
 
-const searchInput =
-    document.querySelector(
-        "#searchInput"
-    );
+const searchInput = document.querySelector("#searchInput");
 
-
-const searchListElement =
-    document.querySelector(
-        "#list"
-    );
-
+const searchListElement = document.querySelector("#list");
 
 // Current Edit Index
 
 let globalIndex = null;
-
 
 // ==========================================
 // SAVE PRODUCTS
 // ==========================================
 
 function saveProducts() {
-
-    localStorage.setItem(
-        "products",
-        JSON.stringify(products)
-    );
+  localStorage.setItem("products", JSON.stringify(products));
 }
-
 
 // ==========================================
 // SHOW PRODUCTS
 // ==========================================
 
 function showProducts() {
+  tableBody.innerHTML = "";
 
-    tableBody.innerHTML = "";
-
-
-    if (products.length === 0) {
-
-        tableBody.innerHTML = `
+  if (products.length === 0) {
+    tableBody.innerHTML = `
 
             <tr>
 
@@ -205,14 +75,11 @@ function showProducts() {
 
         `;
 
-        return;
-    }
+    return;
+  }
 
-
-    products.forEach(
-        (product, index) => {
-
-            tableBody.innerHTML += `
+  products.forEach((product, index) => {
+    tableBody.innerHTML += `
 
                 <tr>
 
@@ -281,552 +148,326 @@ function showProducts() {
                 </tr>
 
             `;
-        }
-    );
+  });
 
-
-    searchList();
+  searchList();
 }
-
 
 // ==========================================
 // SEARCH LIST
 // ==========================================
 
 function searchList() {
+  searchListElement.innerHTML = "";
 
-    searchListElement.innerHTML = "";
+  const searchValue = searchInput.value.replace(/\s+/g, "").toLowerCase();
 
+  if (searchValue === "") {
+    return;
+  }
 
-    const searchValue =
-        searchInput.value
-            .replace(/\s+/g, "")
-            .toLowerCase();
+  products.forEach((product) => {
+    const productName = product.name.replace(/\s+/g, "").toLowerCase();
 
-
-    if (searchValue === "") {
-        return;
-    }
-
-
-    products.forEach(
-        product => {
-
-            const productName =
-                product.name
-                    .replace(/\s+/g, "")
-                    .toLowerCase();
-
-
-            if (
-                productName.includes(
-                    searchValue
-                )
-            ) {
-
-                searchListElement.innerHTML += `
+    if (productName.includes(searchValue)) {
+      searchListElement.innerHTML += `
 
                     <option
                         value="${product.name}"
                     ></option>
 
                 `;
-            }
-
-        }
-    );
+    }
+  });
 }
-
 
 // ==========================================
 // OPEN ADD MODAL
 // ==========================================
 
 function openModal() {
-
-    newPhoneModal.style.display =
-        "flex";
+  newPhoneModal.style.display = "flex";
 }
-
 
 // ==========================================
 // CLOSE MODALS
 // ==========================================
 
 function closeModal() {
+  newPhoneModal.style.display = "none";
 
-    newPhoneModal.style.display =
-        "none";
+  editPhoneModal.style.display = "none";
 
+  clearAddInputs();
 
-    editPhoneModal.style.display =
-        "none";
+  clearEditInputs();
 
-
-    clearAddInputs();
-
-    clearEditInputs();
-
-    globalIndex = null;
+  globalIndex = null;
 }
-
 
 // ==========================================
 // CLEAR ADD INPUTS
 // ==========================================
 
 function clearAddInputs() {
+  phoneNameInput.value = "";
 
-    phoneNameInput.value = "";
+  phonePriceInput.value = "";
 
-    phonePriceInput.value = "";
+  phoneQtyInput.value = "";
 
-    phoneQtyInput.value = "";
-
-    phoneImageInput.value = "";
+  phoneImageInput.value = "";
 }
-
 
 // ==========================================
 // CLEAR EDIT INPUTS
 // ==========================================
 
 function clearEditInputs() {
+  phoneNameInputE.value = "";
 
-    phoneNameInputE.value = "";
+  phonePriceInputE.value = "";
 
-    phonePriceInputE.value = "";
+  phoneQtyInputE.value = "";
 
-    phoneQtyInputE.value = "";
-
-    phoneImageInputE.value = "";
+  phoneImageInputE.value = "";
 }
-
 
 // ==========================================
 // ADD NEW PHONE
 // ==========================================
 
 function addNewPhone() {
+  const name = phoneNameInput.value.trim();
 
-    const name =
-        phoneNameInput.value.trim();
+  const price = Number(phonePriceInput.value);
 
+  const qty = Number(phoneQtyInput.value);
 
-    const price =
-        Number(
-            phonePriceInput.value
-        );
+  const image = phoneImageInput.value.trim() || defaultImage;
 
+  // Name validation
 
-    const qty =
-        Number(
-            phoneQtyInput.value
-        );
+  if (name === "") {
+    alert("Phone name cannot be empty");
 
+    return;
+  }
 
-    const image =
-        phoneImageInput.value.trim()
-        || defaultImage;
+  // Price validation
 
+  if (phonePriceInput.value === "" || price <= 0) {
+    alert("Phone price must be greater than 0");
 
-    // Name validation
+    return;
+  }
 
-    if (name === "") {
+  // Quantity validation
 
-        alert(
-            "Phone name cannot be empty"
-        );
+  if (phoneQtyInput.value === "" || qty <= 0) {
+    alert("Phone quantity must be greater than 0");
 
-        return;
-    }
+    return;
+  }
 
+  // Create Product
 
-    // Price validation
+  const product = {
+    id: crypto.randomUUID(),
 
-    if (
-        phonePriceInput.value === ""
-        || price <= 0
-    ) {
+    name: name,
 
-        alert(
-            "Phone price must be greater than 0"
-        );
+    price: price,
 
-        return;
-    }
+    totalQty: qty,
 
+    imgUrl: image,
+  };
 
-    // Quantity validation
+  products.push(product);
 
-    if (
-        phoneQtyInput.value === ""
-        || qty <= 0
-    ) {
+  saveProducts();
 
-        alert(
-            "Phone quantity must be greater than 0"
-        );
+  closeModal();
 
-        return;
-    }
-
-
-    // Create Product
-
-    const product = {
-
-        id: crypto.randomUUID(),
-
-        name: name,
-
-        price: price,
-
-        totalQty: qty,
-
-        imgUrl: image
-    };
-
-
-    products.push(product);
-
-
-    saveProducts();
-
-
-    closeModal();
-
-
-    showProducts();
+  showProducts();
 }
-
 
 // ==========================================
 // DELETE
 // ==========================================
 
 function Delete(index) {
+  const product = products[index];
 
-    const product =
-        products[index];
+  if (!product) {
+    return;
+  }
 
+  const isConfirm = confirm(
+    `Are you sure you want to delete "${product.name}"?`,
+  );
 
-    if (!product) {
-        return;
-    }
+  if (!isConfirm) {
+    return;
+  }
 
+  const deletedId = product.id;
 
-    const isConfirm =
-        confirm(
-            `Are you sure you want to delete "${product.name}"?`
-        );
+  // Delete product
 
+  products.splice(index, 1);
 
-    if (!isConfirm) {
-        return;
-    }
+  saveProducts();
 
+  // Remove from cart
 
-    const deletedId =
-        product.id;
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+  cart = cart.filter((item) => item.id !== deletedId);
 
-    // Delete product
+  localStorage.setItem("cart", JSON.stringify(cart));
 
-    products.splice(
-        index,
-        1
-    );
-
-
-    saveProducts();
-
-
-    // Remove from cart
-
-    let cart =
-        JSON.parse(
-            localStorage.getItem("cart")
-        ) || [];
-
-
-    cart =
-        cart.filter(
-            item =>
-                item.id !== deletedId
-        );
-
-
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
-
-
-    showProducts();
+  showProducts();
 }
-
 
 // ==========================================
 // EDIT
 // ==========================================
 
 function Edit(index) {
+  const product = products[index];
 
-    const product =
-        products[index];
+  if (!product) {
+    return;
+  }
 
+  globalIndex = index;
 
-    if (!product) {
-        return;
-    }
+  phoneNameInputE.value = product.name;
 
+  phonePriceInputE.value = product.price;
 
-    globalIndex = index;
+  phoneQtyInputE.value = product.totalQty;
 
+  phoneImageInputE.value = product.imgUrl;
 
-    phoneNameInputE.value =
-        product.name;
-
-
-    phonePriceInputE.value =
-        product.price;
-
-
-    phoneQtyInputE.value =
-        product.totalQty;
-
-
-    phoneImageInputE.value =
-        product.imgUrl;
-
-
-    editPhoneModal.style.display =
-        "flex";
+  editPhoneModal.style.display = "flex";
 }
-
 
 // ==========================================
 // EDIT PHONE
 // ==========================================
 
 function editPhone() {
+  if (globalIndex === null) {
+    return;
+  }
 
-    if (
-        globalIndex === null
-    ) {
-        return;
-    }
+  const product = products[globalIndex];
 
+  const name = phoneNameInputE.value.trim();
 
-    const product =
-        products[globalIndex];
+  const price = Number(phonePriceInputE.value);
 
+  const qty = Number(phoneQtyInputE.value);
 
-    const name =
-        phoneNameInputE.value.trim();
+  const image = phoneImageInputE.value.trim() || defaultImage;
 
+  // Validation
 
-    const price =
-        Number(
-            phonePriceInputE.value
-        );
+  if (name === "") {
+    alert("Phone name cannot be empty");
 
+    return;
+  }
 
-    const qty =
-        Number(
-            phoneQtyInputE.value
-        );
+  if (phonePriceInputE.value === "" || price <= 0) {
+    alert("Phone price must be greater than 0");
 
+    return;
+  }
 
-    const image =
-        phoneImageInputE.value.trim()
-        || defaultImage;
+  if (phoneQtyInputE.value === "" || qty <= 0) {
+    alert("Phone quantity must be greater than 0");
 
+    return;
+  }
 
-    // Validation
+  // Update Product
 
-    if (name === "") {
+  product.name = name;
 
-        alert(
-            "Phone name cannot be empty"
-        );
+  product.price = price;
 
-        return;
-    }
+  product.totalQty = qty;
 
+  product.imgUrl = image;
 
-    if (
-        phonePriceInputE.value === ""
-        || price <= 0
-    ) {
+  saveProducts();
 
-        alert(
-            "Phone price must be greater than 0"
-        );
+  updateCartAfterEdit(product);
 
-        return;
-    }
+  closeModal();
 
-
-    if (
-        phoneQtyInputE.value === ""
-        || qty <= 0
-    ) {
-
-        alert(
-            "Phone quantity must be greater than 0"
-        );
-
-        return;
-    }
-
-
-    // Update Product
-
-    product.name = name;
-
-    product.price = price;
-
-    product.totalQty = qty;
-
-    product.imgUrl = image;
-
-
-    saveProducts();
-
-
-    updateCartAfterEdit(
-        product
-    );
-
-
-    closeModal();
-
-
-    showProducts();
+  showProducts();
 }
-
 
 // ==========================================
 // UPDATE CART AFTER EDIT
 // ==========================================
 
-function updateCartAfterEdit(
-    updatedProduct
-) {
+function updateCartAfterEdit(updatedProduct) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    let cart =
-        JSON.parse(
-            localStorage.getItem("cart")
-        ) || [];
+  const cartIndex = cart.findIndex((item) => item.id === updatedProduct.id);
 
+  if (cartIndex === -1) {
+    return;
+  }
 
-    const cartIndex =
-        cart.findIndex(
-            item =>
-                item.id ===
-                updatedProduct.id
-        );
+  cart[cartIndex].name = updatedProduct.name;
 
+  cart[cartIndex].price = updatedProduct.price;
 
-    if (
-        cartIndex === -1
-    ) {
-        return;
-    }
+  cart[cartIndex].totalQty = updatedProduct.totalQty;
 
+  cart[cartIndex].imgUrl = updatedProduct.imgUrl;
 
-    cart[cartIndex].name =
-        updatedProduct.name;
+  // Fix quantity if stock decreased
 
+  if (cart[cartIndex].qty > updatedProduct.totalQty) {
+    cart[cartIndex].qty = updatedProduct.totalQty;
+  }
 
-    cart[cartIndex].price =
-        updatedProduct.price;
-
-
-    cart[cartIndex].totalQty =
-        updatedProduct.totalQty;
-
-
-    cart[cartIndex].imgUrl =
-        updatedProduct.imgUrl;
-
-
-    // Fix quantity if stock decreased
-
-    if (
-        cart[cartIndex].qty >
-        updatedProduct.totalQty
-    ) {
-
-        cart[cartIndex].qty =
-            updatedProduct.totalQty;
-    }
-
-
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
-
 
 // ==========================================
 // SEARCH
 // ==========================================
 
 function searchByName() {
+  const searchValue = searchInput.value.replace(/\s+/g, "").toLowerCase();
 
-    const searchValue =
-        searchInput.value
-            .replace(/\s+/g, "")
-            .toLowerCase();
+  if (searchValue === "") {
+    showProducts();
 
+    return;
+  }
 
-    if (
-        searchValue === ""
-    ) {
+  const filteredProducts = products.filter((product) => {
+    const name = product.name.replace(/\s+/g, "").toLowerCase();
 
-        showProducts();
+    return name.includes(searchValue);
+  });
 
-        return;
-    }
+  tableBody.innerHTML = "";
 
+  filteredProducts.forEach((product) => {
+    const index = products.indexOf(product);
 
-    const filteredProducts =
-        products.filter(
-            product => {
-
-                const name =
-                    product.name
-                        .replace(
-                            /\s+/g,
-                            ""
-                        )
-                        .toLowerCase();
-
-
-                return name.includes(
-                    searchValue
-                );
-            }
-        );
-
-
-    tableBody.innerHTML = "";
-
-
-    filteredProducts.forEach(
-        product => {
-
-            const index =
-                products.indexOf(
-                    product
-                );
-
-
-            tableBody.innerHTML += `
+    tableBody.innerHTML += `
 
                 <tr>
 
@@ -895,15 +536,10 @@ function searchByName() {
                 </tr>
 
             `;
-        }
-    );
+  });
 
-
-    if (
-        filteredProducts.length === 0
-    ) {
-
-        tableBody.innerHTML = `
+  if (filteredProducts.length === 0) {
+    tableBody.innerHTML = `
 
             <tr>
 
@@ -917,38 +553,22 @@ function searchByName() {
             </tr>
 
         `;
-    }
+  }
 }
-
 
 // ==========================================
 // CLICK OUTSIDE MODAL
 // ==========================================
 
-window.addEventListener(
-    "click",
-    event => {
+window.addEventListener("click", (event) => {
+  if (event.target === newPhoneModal) {
+    closeModal();
+  }
 
-        if (
-            event.target ===
-            newPhoneModal
-        ) {
-
-            closeModal();
-        }
-
-
-        if (
-            event.target ===
-            editPhoneModal
-        ) {
-
-            closeModal();
-        }
-
-    }
-);
-
+  if (event.target === editPhoneModal) {
+    closeModal();
+  }
+});
 
 // ==========================================
 // INITIAL LOAD
