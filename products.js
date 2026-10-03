@@ -1,6 +1,23 @@
 // ==========================================
 // PRODUCTS
-// ========================================
+// ==========================================
+
+let products = JSON.parse(localStorage.getItem("products")) || [];
+
+// ==========================================
+// CART
+// ==========================================
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// ==========================================
+// DOM ELEMENTS
+// ==========================================
+
+const totalCostElement = document.querySelector("#TotalCost");
+
+const lengthElement = document.querySelector("#Length");
+
 const productArea = document.querySelector("#productArea");
 
 const cartContainer = document.querySelector("#cartContainer");
