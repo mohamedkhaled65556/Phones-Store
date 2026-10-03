@@ -7,15 +7,6 @@ let products =
         localStorage.getItem("products")
     ) || [];
 
-
-// ==========================================
-// DEFAULT IMAGE
-// ==========================================
-
-const defaultImage =
-    "https://media.istockphoto.com/id/180828118/photo/old-used-cellphones-pile.jpg?s=612x612&w=0&k=20&c=v9UdXyz7dOdz126qOTLvUFLJmZdF4M2NHNq57Tq_4Kw=";
-
-
 // ==========================================
 // INITIAL PRODUCTS
 // ==========================================
@@ -27,52 +18,52 @@ if (products.length === 0) {
         {
             id: crypto.randomUUID(),
 
-            name: "Samsung",
+            name: "Samsung A13",
 
-            price: 245,
+            price: 300,
 
-            totalQty: 6,
+            totalQty: 10,
 
-            imgUrl: defaultImage
+            imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSttTJWLajYboJMhLc8_eUMIJpy60Jt8UBsj7Fsb0O5eA&s=10"
         },
 
 
         {
             id: crypto.randomUUID(),
 
-            name: "Iphone",
+            name: "Iphone 18 Pro",
 
-            price: 258,
+            price: 1500,
 
-            totalQty: 6,
+            totalQty: 8,
 
-            imgUrl: defaultImage
+            imgUrl: "https://www.google.com/aclk?sa=L&ai=DChsSEwi5vqOH2p2XAxUcy0QHHQwqCq8YACICCAEQARoCZWY&co=1&ase=2&gclid=Cj0KCQjwz4LWBhCMARIsAFEG5Mp_wiAYtBFlzLqOxiTg2MRjJzJEd3cBdO3zQae3nXc5oSXKugc9ef8aAhRAEALw_wcB&cid=CAAS3gHkaCzUkzNaI5oGFMLjXiA-6njc22XH8YaSeEo8_kUh_Mz5w_LITB5OY38Z2YONvxKlP-qXwUK8MSCUEdIgbXbYd9TTIMb7HYreKudHNDOqBiPTexCEZMtTQ80ocehEAnYEzmbt1MJ912waliXXeFLvjX8ncEwtRIfQK9tN3aHQyDD986OuY2eXf4X2mtRpcG-6GmYA_947XrxRECup469NvVEGRY_-dmIDSDwZQ8rlaTFA8hDoK5SVzun43yYsjojmV1MwOwRtT2jR3FLs421sNV2B0SITir0jaVfb4Oo&cce=2&category=acrcp_v1_32&sig=AOD64_0xWG3FKYjUxn0BPfTlfkjh4THTZg&ctype=5&q=&nis=4&ved=2ahUKEwjq_p6H2p2XAxUW4wIHHXP2F4EQ5bgDKAB6BAgHEAs&adurl="
         },
 
 
         {
             id: crypto.randomUUID(),
 
-            name: "Ahmed",
+            name: "Iphone X",
 
-            price: 243,
+            price: 400,
 
             totalQty: 6,
 
-            imgUrl: defaultImage
+            imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJjSJGlwJNJTrYwa8zzF87dIUzglwHZpsnGHp4DE6VFA&s=10"
         },
 
 
         {
             id: crypto.randomUUID(),
 
-            name: "Mochtar",
+            name: "Oppo F9",
 
-            price: 125,
+            price: 200,
 
-            totalQty: 6,
+            totalQty: 12,
 
-            imgUrl: defaultImage
+            imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaT3sqS93tEAx4DqHiAYOu2D8MGxe2YwFKsq2JbVxYpg&s=10"
         }
 
     ];
