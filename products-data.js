@@ -3,11 +3,11 @@ products = [
   {
     id: crypto.randomUUID(),
 
-    name: "تليفون ملك",
+    name: "Iphone Fold",
 
     price: 2000,
 
-    totalQty: 1,
+    totalQty: 2,
 
     imgUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIZEB2PMai2NXWLp8XpTXKfB61VZUdIGQn5s6q-p0nyA&s=10",
