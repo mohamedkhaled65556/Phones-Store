@@ -7,13 +7,11 @@
 
     <title>Phone Store</title>
 
-    <!-- Bootstrap -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
     />
 
-    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
@@ -25,15 +23,11 @@
 
   <body>
     <section class="store-section">
-      <!-- =========================
-         Store Header
-    ========================== -->
 
       <div class="store-header">
         <h1>Phone Store</h1>
 
         <div class="cart-header">
-          <!-- Search -->
           <div class="search">
             <input
               id="searchInput"
@@ -53,36 +47,31 @@
             </button>
           </div>
 
-          <!-- Show All -->
           <button class="btn1 admin-button" onclick="showProducts()">
             <i class="fa-solid fa-list"></i>
 
             Show All
           </button>
 
-          <!-- Admin Button -->
           <a href="admin-login.html" class="btn1 admin-button">
             <i class="fa-solid fa-user-shield"></i>
             Admin
           </a>
 
-          <!-- Cart Button -->
-          <button
-            class="cart-button"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasRight"
-          >
-            <i class="fa-solid fa-cart-shopping"></i>
-          </button>
+          <div class="cart-container">
+            <button
+              class="cart-button"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasRight"
+            >
+              <i class="fa-solid fa-cart-shopping"></i>
+            </button>
 
-          <span id="Length">0</span>
+            <span id="Length">0</span>
+          </div>
         </div>
       </div>
-
-      <!-- =========================
-         Cart Offcanvas
-    ========================== -->
 
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight">
         <div class="offcanvas-header">
@@ -105,17 +94,11 @@
         </div>
       </div>
 
-      <!-- =========================
-         Products
-    ========================== -->
-
       <div id="productArea" class="product-area"></div>
     </section>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Products JS -->
     <script src="./products-data.js"></script>
     <script src="./products.js"></script>
   </body>
