@@ -1,12 +1,5 @@
-// ==========================================
-// PRODUCTS
-// ==========================================
 
 products = JSON.parse(localStorage.getItem("products")) || [];
-
-// ==========================================
-// DOM ELEMENTS
-// ==========================================
 
 const tableBody = document.querySelector("#productsTableBody");
 
@@ -14,7 +7,6 @@ const newPhoneModal = document.querySelector("#newPhoneModal");
 
 const editPhoneModal = document.querySelector("#editPhoneModal");
 
-// Add Inputs
 
 const phoneNameInput = document.querySelector("#phoneNameInput");
 
@@ -24,7 +16,6 @@ const phoneQtyInput = document.querySelector("#phoneQtyInput");
 
 const phoneImageInput = document.querySelector("#phoneImageInput");
 
-// Edit Inputs
 
 const phoneNameInputE = document.querySelector("#phoneNameInputE");
 
@@ -34,27 +25,19 @@ const phoneQtyInputE = document.querySelector("#phoneQtyInputE");
 
 const phoneImageInputE = document.querySelector("#phoneImageInputE");
 
-// Search
 
 const searchInput = document.querySelector("#searchInput");
 
 const searchListElement = document.querySelector("#list");
 
-// Current Edit Index
 
 let globalIndex = null;
 
-// ==========================================
-// SAVE PRODUCTS
-// ==========================================
 
 function saveProducts() {
   localStorage.setItem("products", JSON.stringify(products));
 }
 
-// ==========================================
-// SHOW PRODUCTS
-// ==========================================
 
 function showProducts() {
   tableBody.innerHTML = "";
@@ -153,9 +136,6 @@ function showProducts() {
   searchList();
 }
 
-// ==========================================
-// SEARCH LIST
-// ==========================================
 
 function searchList() {
   searchListElement.innerHTML = "";
@@ -181,17 +161,11 @@ function searchList() {
   });
 }
 
-// ==========================================
-// OPEN ADD MODAL
-// ==========================================
 
 function openModal() {
   newPhoneModal.style.display = "flex";
 }
 
-// ==========================================
-// CLOSE MODALS
-// ==========================================
 
 function closeModal() {
   newPhoneModal.style.display = "none";
@@ -205,9 +179,6 @@ function closeModal() {
   globalIndex = null;
 }
 
-// ==========================================
-// CLEAR ADD INPUTS
-// ==========================================
 
 function clearAddInputs() {
   phoneNameInput.value = "";
@@ -219,9 +190,6 @@ function clearAddInputs() {
   phoneImageInput.value = "";
 }
 
-// ==========================================
-// CLEAR EDIT INPUTS
-// ==========================================
 
 function clearEditInputs() {
   phoneNameInputE.value = "";
@@ -233,9 +201,6 @@ function clearEditInputs() {
   phoneImageInputE.value = "";
 }
 
-// ==========================================
-// ADD NEW PHONE
-// ==========================================
 
 function addNewPhone() {
   const name = phoneNameInput.value.trim();
@@ -246,7 +211,6 @@ function addNewPhone() {
 
   const image = phoneImageInput.value.trim() || defaultImage;
 
-  // Name validation
 
   if (name === "") {
     alert("Phone name cannot be empty");
@@ -254,7 +218,6 @@ function addNewPhone() {
     return;
   }
 
-  // Price validation
 
   if (phonePriceInput.value === "" || price <= 0) {
     alert("Phone price must be greater than 0");
@@ -262,7 +225,6 @@ function addNewPhone() {
     return;
   }
 
-  // Quantity validation
 
   if (phoneQtyInput.value === "" || qty <= 0) {
     alert("Phone quantity must be greater than 0");
@@ -270,7 +232,6 @@ function addNewPhone() {
     return;
   }
 
-  // Create Product
 
   const product = {
     id: crypto.randomUUID(),
@@ -293,9 +254,6 @@ function addNewPhone() {
   showProducts();
 }
 
-// ==========================================
-// DELETE
-// ==========================================
 
 function Delete(index) {
   const product = products[index];
@@ -314,13 +272,11 @@ function Delete(index) {
 
   const deletedId = product.id;
 
-  // Delete product
 
   products.splice(index, 1);
 
   saveProducts();
 
-  // Remove from cart
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -331,9 +287,6 @@ function Delete(index) {
   showProducts();
 }
 
-// ==========================================
-// EDIT
-// ==========================================
 
 function Edit(index) {
   const product = products[index];
@@ -355,9 +308,6 @@ function Edit(index) {
   editPhoneModal.style.display = "flex";
 }
 
-// ==========================================
-// EDIT PHONE
-// ==========================================
 
 function editPhone() {
   if (globalIndex === null) {
@@ -374,7 +324,6 @@ function editPhone() {
 
   const image = phoneImageInputE.value.trim() || defaultImage;
 
-  // Validation
 
   if (name === "") {
     alert("Phone name cannot be empty");
@@ -394,7 +343,6 @@ function editPhone() {
     return;
   }
 
-  // Update Product
 
   product.name = name;
 
@@ -413,9 +361,6 @@ function editPhone() {
   showProducts();
 }
 
-// ==========================================
-// UPDATE CART AFTER EDIT
-// ==========================================
 
 function updateCartAfterEdit(updatedProduct) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -434,8 +379,6 @@ function updateCartAfterEdit(updatedProduct) {
 
   cart[cartIndex].imgUrl = updatedProduct.imgUrl;
 
-  // Fix quantity if stock decreased
-
   if (cart[cartIndex].qty > updatedProduct.totalQty) {
     cart[cartIndex].qty = updatedProduct.totalQty;
   }
@@ -443,9 +386,6 @@ function updateCartAfterEdit(updatedProduct) {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// ==========================================
-// SEARCH
-// ==========================================
 
 function searchByName() {
   const searchValue = searchInput.value.replace(/\s+/g, "").toLowerCase();
@@ -556,10 +496,6 @@ function searchByName() {
   }
 }
 
-// ==========================================
-// CLICK OUTSIDE MODAL
-// ==========================================
-
 window.addEventListener("click", (event) => {
   if (event.target === newPhoneModal) {
     closeModal();
@@ -569,9 +505,5 @@ window.addEventListener("click", (event) => {
     closeModal();
   }
 });
-
-// ==========================================
-// INITIAL LOAD
-// ==========================================
 
 showProducts();
