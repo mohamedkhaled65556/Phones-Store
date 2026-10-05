@@ -536,16 +536,29 @@ body {
   }
 
   .cart-button {
-    width: 50px !important;
-    height: 50px;
-    align-self: center;
-  }
+  width: 50px !important;
+  height: 50px;
+  position: relative;
+  align-self: center;
+}
 
-  #Length {
-    position: absolute;
-    margin-top: -65px;
-    margin-left: 35px;
-  }
+#Length {
+  position: absolute;
+  margin: 0;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #ed2400;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  right: 5px;
+  top: 0;
+}
 
   .product-area {
     width: 100%;
