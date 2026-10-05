@@ -1,18 +1,9 @@
-// ==========================================
-// PRODUCTS
-// ==========================================
 
 products = JSON.parse(localStorage.getItem("products"));
 
-// ==========================================
-// CART
-// ==========================================
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// ==========================================
-// DOM ELEMENTS
-// ==========================================
 
 const totalCostElement = document.querySelector("#TotalCost");
 
@@ -26,25 +17,16 @@ const searchInput = document.querySelector("#searchInput");
 
 const searchListElement = document.querySelector("#list");
 
-// ==========================================
-// LOAD PRODUCTS
-// ==========================================
 
 function loadProducts() {
   products = JSON.parse(localStorage.getItem("products")) || [];
 }
 
-// ==========================================
-// SAVE CART
-// ==========================================
 
 function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// ==========================================
-// SHOW PRODUCTS
-// ==========================================
 
 function showProducts() {
   loadProducts();
@@ -128,9 +110,6 @@ function showProducts() {
   });
 }
 
-// ==========================================
-// ADD TO CART
-// ==========================================
 
 function addToCart(index) {
   loadProducts();
@@ -180,9 +159,6 @@ function addToCart(index) {
   Increase(indexInCart);
 }
 
-// ==========================================
-// SHOW CART
-// ==========================================
 
 function showCart() {
   cartContainer.innerHTML = "";
@@ -289,9 +265,6 @@ function showCart() {
   updateCartLength();
 }
 
-// ==========================================
-// INCREASE
-// ==========================================
 
 function Increase(index) {
   const product = cart[index];
@@ -299,8 +272,6 @@ function Increase(index) {
   if (!product) {
     return;
   }
-
-  // Refresh stock from products
 
   loadProducts();
 
@@ -331,10 +302,6 @@ function Increase(index) {
   showCart();
 }
 
-// ==========================================
-// DECREASE
-// ==========================================
-
 function Decrease(index) {
   const product = cart[index];
 
@@ -353,9 +320,6 @@ function Decrease(index) {
   showCart();
 }
 
-// ==========================================
-// REMOVE FROM CART
-// ==========================================
 
 function removeFromCart(index) {
   if (index < 0 || index >= cart.length) {
@@ -369,10 +333,6 @@ function removeFromCart(index) {
   showCart();
 }
 
-// ==========================================
-// CALCULATE TOTAL
-// ==========================================
-
 function calcTotal() {
   let total = 0;
 
@@ -383,9 +343,6 @@ function calcTotal() {
   totalCostElement.innerHTML = total.toFixed(2);
 }
 
-// ==========================================
-// CART LENGTH
-// ==========================================
 
 function updateCartLength() {
   const totalItems = cart.reduce((total, product) => {
@@ -394,10 +351,6 @@ function updateCartLength() {
 
   lengthElement.innerHTML = totalItems;
 }
-
-// ==========================================
-// INITIAL LOAD
-// ==========================================
 
 showProducts();
 
