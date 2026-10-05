@@ -538,26 +538,28 @@ body {
   .cart-button {
   width: 50px !important;
   height: 50px;
-  position: relative;
   align-self: center;
+  flex-shrink: 0;
 }
 
 #Length {
-  position: absolute;
-  margin: 0;
+  min-width: 25px;
   width: 25px;
   height: 25px;
+
   padding: 0;
+  margin: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   border-radius: 50%;
   background-color: #ed2400;
   color: white;
   font-size: 13px;
   font-weight: bold;
-  right: 5px;
-  top: 0;
+  transform: translateX(-18px);
 }
 
   .product-area {
