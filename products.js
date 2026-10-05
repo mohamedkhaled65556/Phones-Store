@@ -22,6 +22,10 @@ const productArea = document.querySelector("#productArea");
 
 const cartContainer = document.querySelector("#cartContainer");
 
+const searchInput = document.querySelector("#searchInput");
+
+const searchListElement = document.querySelector("#list");
+
 // ==========================================
 // LOAD PRODUCTS
 // ==========================================
@@ -398,3 +402,120 @@ function updateCartLength() {
 showProducts();
 
 showCart();
+
+function searchList() {
+  searchListElement.innerHTML = "";
+
+  const searchValue = searchInput.value.replace(/\s+/g, "").toLowerCase();
+
+  if (searchValue === "") {
+    return;
+  }
+
+  products.forEach((product) => {
+    const productName = product.name.replace(/\s+/g, "").toLowerCase();
+
+    if (productName.includes(searchValue)) {
+      searchListElement.innerHTML += `
+
+                    <option
+                        value="${product.name}"
+                    ></option>
+
+                `;
+    }
+  });
+}
+
+function searchByName() {
+  const searchValue = searchInput.value.replace(/\s+/g, "").toLowerCase();
+
+  if (searchValue === "") {
+    showProducts();
+
+    return;
+  }
+
+  const filteredProducts = products.filter((product) => {
+    const name = product.name.replace(/\s+/g, "").toLowerCase();
+
+    return name.includes(searchValue);
+  });
+  productArea.innerHTML = "";
+
+  if (filteredProducts.length === 0) {
+    productArea.innerHTML = `
+
+            <div
+                class="alert alert-warning text-center w-100"
+            >
+
+                No products available.
+
+            </div>
+
+        `;
+
+    return;
+  }
+
+  filteredProducts.forEach((product, index) => {
+    productArea.innerHTML += `
+
+                <div class="product-card">
+
+
+                    <img
+                        src="${product.imgUrl}"
+                        alt="${product.name}"
+                        class="product-image"
+                    >
+
+
+                    <div class="card-body">
+
+
+                        <h3 class="card-title text-center">
+
+                            ${product.name}
+
+                        </h3>
+
+
+                        <h5
+                            class="card-text text-center price"
+                        >
+
+                            ${product.price}$
+
+                        </h5>
+
+
+                        <p class="card-text text-center">
+
+                            Available:
+                            ${product.totalQty}
+
+                        </p>
+
+
+                        <button
+                            onclick="addToCart(${index})"
+                            class="btn btn-primary w-100"
+                        >
+
+                            <i
+                                class="fa-solid fa-cart-plus"
+                            ></i>
+
+                            Add To Cart
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+  });
+}
